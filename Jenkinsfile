@@ -1,5 +1,4 @@
 properties([pipelineTriggers([githubPush()])])
-#!groovy
 pipeline{
 	agent any
  
