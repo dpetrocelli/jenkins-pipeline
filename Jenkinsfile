@@ -7,7 +7,7 @@ pipeline{
  
 		stage('test'){
 			steps {
-				echo "This is a new implementation but new new -> not polling"
+				echo "This is a new implementation but new new -> not pollinddg"
 			
 			}
 		}			
