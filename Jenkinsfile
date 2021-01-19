@@ -1,3 +1,4 @@
+properties([pipelineTriggers([githubPush()])])
 #!groovy
 pipeline{
 	agent any
@@ -6,7 +7,7 @@ pipeline{
  
 		stage('test'){
 			steps {
-				echo "This is a new implementation"
+				echo "This is a new implementation but new new"
 			
 			}
 		}			
