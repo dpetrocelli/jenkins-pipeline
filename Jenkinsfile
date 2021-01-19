@@ -4,24 +4,28 @@ pipeline{
 	agent {
         label 'github-ci'
     }
-
+	
+	stage('Setting the variables values') {
+    steps {
+         sh '''
+            #!/bin/bash
+            curl -v "https://api.github.com/repos/libgit2/libgit2/tags" | grep name
+         '''
+   		}
+	}
 	stages {
-        stage('Example') {
+        /* checkout repo */
+        stage('Checkout SCM') {
             steps {
-                script {
-                    dir('git-source-code') {
-                          git(
-                            url: "https://github.com/dpetrocelli/jenkins-pipeline",
-                            credentialsId: '',
-                            branch: "master"
-                          )      
-                          def tagList = sh(returnStdout: true, script: "git for-each-ref --sort=-taggerdate --format '%(tag)' refs/tags").split()
-                          tagList.each { nxtTag ->
-                              echo nxtTag
-                          }
-                    }
-                }
+                checkout([
+                 $class: 'GitSCM',
+                 branches: [[name: 'master']],
+                 userRemoteConfigs: [[
+                    url: 'https://github.com/dpetrocelli/jenkins-pipeline',
+                    credentialsId: '',
+                 ]]
+                ])
             }
-        }
-    }
+    	}
+	}
 }
