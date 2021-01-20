@@ -28,15 +28,8 @@ pipeline{
 				steps {
 					withEnv(["PROD_COMMIT=yes"]) {
 					
-					echo 'I only execute on the master branch'
-					checkout([
-					$class: 'GitSCM',
-					branches: [[name: 'master']],
-					userRemoteConfigs: [[
-						url: 'https://github.com/dpetrocelli/jenkins-pipeline',
-						credentialsId: '',
-					]]
-					])
+					echo 'Cloning '
+					sh 'git clone https://github.com/dpetrocelli/jenkins-pipeline'
 					}
 					
 				}
