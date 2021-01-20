@@ -37,8 +37,8 @@ pipeline{
 
 		stage ('Compile Stage')  {
 			steps {
-				
-					sh 'cd jenkins-pipeline ; ls '	
+					echo 'compiling perri'
+					//sh 'cd jenkins-pipeline ; ls '	
 								
 			}
 		}
