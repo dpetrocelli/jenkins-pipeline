@@ -5,6 +5,7 @@ pipeline{
 	tools {
     	maven 'M3'
  	}
+	 
 	environment {
         PROD_COMMIT="no"
 	}
