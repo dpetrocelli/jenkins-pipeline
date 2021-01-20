@@ -1,6 +1,6 @@
 properties([pipelineTriggers([githubPush()])])
 
-pipeline{
+/*pipeline{
 	agent any
 	
 	
@@ -40,10 +40,30 @@ pipeline{
 				
 					sh 'cd jenkins-pipeline ; cd java-code ; mvn -B -DskipTests clean package'	
 				
+			}
+		}
+
+		stage ('Build Docker Image')  {
+			steps {
+				
+					sh 'cd jenkins-pipeline ; cd java-code ; mvn -B -DskipTests clean package'	
 				
 			}
 		}
 	
 	}
 	
+}
+*/
+pipeline {
+    agent {
+        docker { image 'node:14-alpine' }
+    }
+    stages {
+        stage('Test') {
+            steps {
+                sh 'node --version'
+            }
+        }
+    }
 }
