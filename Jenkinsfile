@@ -14,7 +14,11 @@ pipeline{
 				sh '''
 				release=$(curl "https://api.github.com/repos/dpetrocelli/jenkins-pipeline/commits" | grep "message" | head -1 | cut -d':' -f2 | cut -d'"' -f2)
 				echo $release
-				
+				if [[ $release = production-* ]] ; then
+					echo $release
+					env.PROD_COMMIT='yes'
+				fi
+				echo $env.PROD_COMMIT
 				'''
 			}
 		}
