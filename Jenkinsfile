@@ -17,8 +17,9 @@ pipeline{
 				if [[ $release = production-* ]] ; then
 					echo $release
 					env.PROD_COMMIT='yes'
+					echo $env.PROD_COMMIT
 				fi
-				echo $env.PROD_COMMIT
+				
 				'''
 			}
 		}
