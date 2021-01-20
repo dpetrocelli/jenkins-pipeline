@@ -29,7 +29,7 @@ pipeline{
 					withEnv(["PROD_COMMIT=yes"]) {
 					
 					echo 'Cloning '
-					sh 'git clone https://github.com/dpetrocelli/jenkins-pipeline'
+					sh 'rm -rf jenkins-pipeline ; git clone https://github.com/dpetrocelli/jenkins-pipeline'
 					}
 					
 				}
