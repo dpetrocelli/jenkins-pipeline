@@ -44,9 +44,9 @@ pipeline{
 
 		stage ('Compile Stage')  {
 			steps {
-				withMaven{
-					sh 'mvn -B -DskipTests clean package'	
-				}
+				
+					sh '/usr/bin/mvn -B -DskipTests clean package'	
+				
 				
 			}
 		}
