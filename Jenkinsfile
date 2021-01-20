@@ -2,9 +2,7 @@ properties([pipelineTriggers([githubPush()])])
 
 pipeline{
 	agent any
-	tools {
-        maven 'Maven_3.6.3' 
-    }
+	
 	
 	environment {
         PROD_COMMIT="no"
