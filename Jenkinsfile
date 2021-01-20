@@ -44,10 +44,10 @@ pipeline{
 
 		stage ('Compile Stage')  {
 			steps {
-				/*withMaven(maven: 'maven-latest', options: [artifactsPublisher(disabled: true), dependenciesFingerprintPublisher(disabled: true, includeScopeCompile: false, includeScopeProvided: false, includeScopeRuntime: false, includeSnapshotVersions: false)]) {
-					
-				}*/
-				sh 'mvn -B -DskipTests clean package'
+				withMaven{
+					sh 'mvn -B -DskipTests clean package'	
+				}
+				
 			}
 		}
 	
