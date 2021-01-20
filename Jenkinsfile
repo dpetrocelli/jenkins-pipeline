@@ -45,7 +45,7 @@ pipeline{
 		stage ('Compile Stage')  {
 			steps {
 				
-					sh '/usr/bin/mvn -B -DskipTests clean package'	
+					sh 'mvn -B -DskipTests clean package'	
 				
 				
 			}
