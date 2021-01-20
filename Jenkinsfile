@@ -8,21 +8,25 @@ pipeline{
 	}
 
 	stages {
-		stage("Ask for repo commits") {
-			sh '''
-			release=$(curl "https://api.github.com/repos/dpetrocelli/jenkins-pipeline/commits" | grep "message" | head -1 | cut -d':' -f2 | cut -d'"' -f2)'
-			if [[ $release = production-* ]] ; then
-				echo $release
-				env.PROD_COMMIT='yes'
-			fi
-			'''
+		stage('Ask for repo commits') {
+			steps {
+
+				sh '''
+				release=$(curl "https://api.github.com/repos/dpetrocelli/jenkins-pipeline/commits" | grep "message" | head -1 | cut -d':' -f2 | cut -d'"' -f2)'
+				if [[ $release = production-* ]] ; then
+					echo $release
+					env.PROD_COMMIT='yes'
+				fi
+				'''
+			}
 		}
 	
         /* checkout repo */
         stage('Checkout SCM') {
-			if (env.PROD_COMMIT == 'yes') {
-				echo 'I only execute on the master branch'
+			
 				steps {
+					if (env.PROD_COMMIT == 'yes') {
+					echo 'I only execute on the master branch'
 					checkout([
 					$class: 'GitSCM',
 					branches: [[name: 'master']],
@@ -31,10 +35,11 @@ pipeline{
 						credentialsId: '',
 					]]
 					])
+					}
+					else{
+						echo 'not changed'
+					}
 				}
-			}else{
-				echo 'not changed'
-			}
     	}
 	}
 }
