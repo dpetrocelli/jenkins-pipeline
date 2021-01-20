@@ -38,7 +38,7 @@ pipeline{
 		stage ('Compile Stage')  {
 			steps {
 				
-					sh 'cd jenkins-pipeline ; mvn -B -DskipTests clean package'	
+					sh 'cd jenkins-pipeline ; ls '	
 								
 			}
 		}
