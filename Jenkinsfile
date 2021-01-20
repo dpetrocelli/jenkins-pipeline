@@ -11,7 +11,7 @@ pipeline{
 		stage('Ask for repo commits') {
 			steps {
 
-				bash '''
+				sh '''
 				#!/bin/bash
 				release=$(curl "https://api.github.com/repos/dpetrocelli/jenkins-pipeline/commits" | grep "message" | head -1 | cut -d':' -f2 | cut -d'"' -f2)
 				echo $release
