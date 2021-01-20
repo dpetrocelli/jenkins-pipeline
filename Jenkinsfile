@@ -2,7 +2,9 @@ properties([pipelineTriggers([githubPush()])])
 
 pipeline{
 	agent any
-	
+	tools {
+        maven 'Maven_3.5.2' 
+    }
 	
 	environment {
         PROD_COMMIT="no"
@@ -44,9 +46,10 @@ pipeline{
 
 		stage ('Compile Stage')  {
 			steps {
-				withMaven(maven: 'maven-latest', options: [artifactsPublisher(disabled: true), dependenciesFingerprintPublisher(disabled: true, includeScopeCompile: false, includeScopeProvided: false, includeScopeRuntime: false, includeSnapshotVersions: false)]) {
-					sh 'mvn clean compile'
-				}
+				/*withMaven(maven: 'maven-latest', options: [artifactsPublisher(disabled: true), dependenciesFingerprintPublisher(disabled: true, includeScopeCompile: false, includeScopeProvided: false, includeScopeRuntime: false, includeSnapshotVersions: false)]) {
+					
+				}*/
+				sh 'mvn clean compile'
 			}
 		}
 	
