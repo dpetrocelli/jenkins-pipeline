@@ -26,7 +26,7 @@ pipeline{
 		 stage('Checkout SCM') {
 			
 				steps {
-					if (PROD_COMMIT == 'yes') {
+					if (env.PROD_COMMIT == 'yes') {
 					echo 'I only execute on the master branch'
 					checkout([
 					$class: 'GitSCM',
