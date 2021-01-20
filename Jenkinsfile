@@ -2,9 +2,9 @@ properties([pipelineTriggers([githubPush()])])
 
 pipeline{
 	agent any
-	 tools {
-		maven 'M3'
-	}
+	tools {
+        maven 'Maven_3.6.3' 
+    }
 	
 	environment {
         PROD_COMMIT="no"
@@ -49,7 +49,7 @@ pipeline{
 				/*withMaven(maven: 'maven-latest', options: [artifactsPublisher(disabled: true), dependenciesFingerprintPublisher(disabled: true, includeScopeCompile: false, includeScopeProvided: false, includeScopeRuntime: false, includeSnapshotVersions: false)]) {
 					
 				}*/
-				sh 'mvn clean compile'
+				sh 'mvn -B -DskipTests clean package'
 			}
 		}
 	
