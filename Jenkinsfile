@@ -44,7 +44,7 @@ pipeline{
 
 		stage ('Compile Stage') {
 			steps {
-				withMaven {
+				withMaven(maven: 'maven-latest', globalMavenSettingsConfig: 'default-global-settings', mavenSettingsConfig: 'codice-maven-settings', mavenOpts: '', options: [artifactsPublisher(disabled: true), dependenciesFingerprintPublisher(disabled: true, includeScopeCompile: false, includeScopeProvided: false, includeScopeRuntime: false, includeSnapshotVersions: false)]) {
 					sh 'mvn clean compile'
 				}
 			}
