@@ -22,7 +22,7 @@ pipeline{
 		}
 	}
 
-	stages {
+
 		 stage('Checkout SCM') {
 			
 				steps {
@@ -44,5 +44,5 @@ pipeline{
     	}
 	
         
-	}
+	
 }
