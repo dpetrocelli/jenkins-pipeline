@@ -2,7 +2,9 @@ properties([pipelineTriggers([githubPush()])])
 
 pipeline{
 	agent any
-
+	tools {
+        maven 'maven-tool'
+     }   
 	environment {
         PROD_COMMIT="no"
 	}
@@ -14,7 +16,7 @@ pipeline{
 				sh '''#!/bin/bash
 				release=$(curl "https://api.github.com/repos/dpetrocelli/jenkins-pipeline/commits" | grep "message" | head -1 | cut -d':' -f2 | cut -d'"' -f2)
 				
-				if [[ $release = production-* ]] ; then
+				if [[ $release = prd-* ]] ; then
 					PROD_COMMIT="yes"
 				fi
 				'''
