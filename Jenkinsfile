@@ -46,7 +46,9 @@ pipeline{
 			node {
 				withMaven(maven:'Maven_3_3_9', mavenLocalRepo: '.repository',mavenSettingsConfig:'my-config') {
 				sh 'mvn clean install'
+				}
 			}
+
 		}
 	
 	}
