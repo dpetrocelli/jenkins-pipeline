@@ -22,11 +22,11 @@ pipeline{
 		}
 	
 
-
-		 stage('Checkout SCM') {
+		stage('Checkout SCM') {
 			
 				steps {
-					if (env.PROD_COMMIT == 'yes') {
+					withEnv(["PROD_COMMIT=yes"]) {
+					
 					echo 'I only execute on the master branch'
 					checkout([
 					$class: 'GitSCM',
@@ -37,9 +37,7 @@ pipeline{
 					]]
 					])
 					}
-					else{
-						echo 'not changed'
-					}
+					
 				}
     	}
 	
