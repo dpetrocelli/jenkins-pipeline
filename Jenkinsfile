@@ -47,11 +47,12 @@ pipeline{
 				}
     	}
 
-		stage('Build') {
-            steps {
-                sh 'mvn -B -DskipTests clean package'
-            }
-        }
+		stage("build app") {
+			node {
+				withMaven(maven:'Maven_3_3_9', mavenLocalRepo: '.repository',mavenSettingsConfig:'my-config') {
+				sh 'mvn clean install'
+			}
+		}
 	
 	}
 	
