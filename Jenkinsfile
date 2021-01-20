@@ -12,12 +12,13 @@ pipeline{
 			steps {
 
 				sh '''#!/bin/bash
+				echo "at the begginning is: $PROD_COMMIT"
 				release=$(curl "https://api.github.com/repos/dpetrocelli/jenkins-pipeline/commits" | grep "message" | head -1 | cut -d':' -f2 | cut -d'"' -f2)
 				echo $release
 				if [[ $release = production-* ]] ; then
 					echo "new release - $release"
-					env.PROD_COMMIT='yess'
-					echo $env.PROD_COMMIT
+					env.PROD_COMMIT="yes"
+					echo "at the end is: $PROD_COMMIT"
 				fi
 				
 				'''
