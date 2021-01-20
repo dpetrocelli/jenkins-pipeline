@@ -37,9 +37,10 @@ pipeline{
 
 		stage ('Compile Stage')  {
 			steps {
-					echo 'compiling perri'
-					//sh 'cd jenkins-pipeline ; ls '	
-								
+				
+					sh 'cd jenkins-pipeline ; mvn -B -DskipTests clean package'	
+				
+				
 			}
 		}
 	
