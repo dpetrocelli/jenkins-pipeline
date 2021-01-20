@@ -44,7 +44,7 @@ pipeline{
 
 		stage ('Compile Stage') {
 			steps {
-				withMaven(maven : 'apache-maven-3.6.1') {
+				withMaven {
 					sh 'mvn clean compile'
 				}
 			}
