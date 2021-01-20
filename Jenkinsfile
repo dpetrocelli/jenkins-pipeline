@@ -21,25 +21,6 @@ pipeline{
 			}
 		}
 	
-        /* checkout repo */
-        stage('Checkout SCM') {
-			
-				steps {
-					if (env.PROD_COMMIT == 'yes') {
-					echo 'I only execute on the master branch'
-					checkout([
-					$class: 'GitSCM',
-					branches: [[name: 'master']],
-					userRemoteConfigs: [[
-						url: 'https://github.com/dpetrocelli/jenkins-pipeline',
-						credentialsId: '',
-					]]
-					])
-					}
-					else{
-						echo 'not changed'
-					}
-				}
-    	}
+        
 	}
 }
