@@ -105,7 +105,7 @@ pipeline {
                     //dockerImage = docker.build registry + ":$BUILD_NUMBER" 
 					echo " image has been built "
 
-					withCredentials([usernamePassword(credentialsId: 'dpetrocelli', passwordVariable: 'dpetrocelliPassword', usernameVariable: 'dpetrocelliUser')]) {
+					withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]){}
           				sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
           				sh 'docker push dpetrocelli/test2:latest'
 						echo " docker image has been published"
