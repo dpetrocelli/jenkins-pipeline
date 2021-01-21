@@ -73,7 +73,8 @@ pipeline {
             steps { 
                 script { 
 					withCredentials([kubeconfigFile(credentialsId: 'oktetokubeconf', variable: 'KUBECONFIG')]) {
-						sh 'echo $KUBECONFIG' // environment variable; not pipeline variable
+						//sh 'echo $KUBECONFIG' // environment variable; not pipeline variable
+						sh "this is a lie :D "
 					}
 				}
 			}
