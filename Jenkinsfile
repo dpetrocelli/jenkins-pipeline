@@ -46,7 +46,7 @@ pipeline {
 		
 		stage('Building image') { 
             steps { 
-                script { 
+                
 					sh 'cd jenkins-pipeline ; cd java-code ; cd automation ; docker build . -t dpetrocelli/test2:latest'
                     //dockerImage = docker.build registry + ":$BUILD_NUMBER" 
 					echo " image has been built "
@@ -56,27 +56,27 @@ pipeline {
           				sh 'docker push dpetrocelli/test2:latest'
 						echo " docker image has been published"
 					}
-                }
+                
             } 
         }
 
 
 		stage('Testing.. nothing yet') { 
             steps { 
-                script { 
+               
 					sh "this is a lie :D "
-				}
+				
             } 
         }
 
 		stage('Kubernetes..') { 
             steps { 
-                script { 
+               
 					withCredentials([kubeconfigFile(credentialsId: 'oktetokubeconf', variable: 'KUBECONFIG')]) {
 						//sh 'echo $KUBECONFIG' // environment variable; not pipeline variable
 						sh "this is a lie :D "
 					}
-				}
+				
 			}
 		}
     }
