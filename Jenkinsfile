@@ -101,9 +101,14 @@ pipeline {
 		stage('Building image') { 
             steps { 
                 script { 
-					sh 'cd jenkins-pipeline ; cd java-code ; cd automation '
-                    dockerImage = docker.build registry + ":$BUILD_NUMBER" 
+					sh 'cd jenkins-pipeline ; cd java-code ; cd automation ; docker build . -t dpetrocelli/test2:latest'
+                    //dockerImage = docker.build registry + ":$BUILD_NUMBER" 
 					echo " image has been built "
+
+					withCredentials([usernamePassword(credentialsId: 'dpetrocelli', passwordVariable: 'dpetrocelliPassword', usernameVariable: 'dpetrocelliUser')]) {
+          			sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
+          			sh 'docker push dpetrocelli/test2:latest'
+					echo " docker image has been published"
                 }
             } 
         }
