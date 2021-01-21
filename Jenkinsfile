@@ -68,6 +68,14 @@ pipeline {
 				}
             } 
         }
-		
+
+		stage('Kubernetes..') { 
+            steps { 
+                script { 
+					withCredentials([kubeconfigFile(credentialsId: 'oktetokubeconf', variable: 'KUBECONFIG')]) {
+						sh 'echo $KUBECONFIG' // environment variable; not pipeline variable
+					}
+				}
+			}
     }
 }
