@@ -61,15 +61,7 @@ pipeline {
         }
 
 
-		stage('Testing.. nothing yet') { 
-            steps { 
-               
-					sh "this is a lie :D "
-				
-            } 
-        }
-
-		stage('Kubernetes..') { 
+		stage('Kubernetes step') { 
             steps { 
                sh 'cd jenkins-pipeline ; kubectl --kubeconfig okteto-kube.conf apply -f dev-restserver-service.yaml; kubectl --kubeconfig okteto-kube.conf delete -f dev-restserver-deployment.yaml; kubectl --kubeconfig okteto-kube.conf apply -f dev-restserver-deployment.yaml'
 			   sh ' k8s deployment has been released'

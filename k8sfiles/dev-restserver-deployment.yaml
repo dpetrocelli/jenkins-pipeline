@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dev-restserver
+  labels:
+    tier: backend
+spec:
+  selector:
+    matchLabels:
+      app: dev-restserver
+      tier: backend
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: dev-restserver
+        tier: backend
+    spec:
+      containers:
+      - name: dev-restserver
+        image: dpetrocelli/test2:latest
+        resources:
+          requests:
+            cpu: 200m
+            memory: 400Mi
+          limits:
+            cpu: 900m
+            memory: 900Mi
