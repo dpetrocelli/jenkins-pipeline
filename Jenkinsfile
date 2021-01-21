@@ -71,12 +71,9 @@ pipeline {
 
 		stage('Kubernetes..') { 
             steps { 
-               
-					withCredentials([kubeconfigFile(credentialsId: 'oktetokubeconf', variable: 'KUBECONFIG')]) {
-						//sh 'echo $KUBECONFIG' // environment variable; not pipeline variable
-						sh "this is a lie :D "
-					}
-				
+               sh 'cd jenkins-pipeline ; kubectl --kubeconfig okteto-kube.conf apply -f dev-restserver-service.yaml; kubectl --kubeconfig okteto-kube.conf delete -f dev-restserver-deployment.yaml; kubectl --kubeconfig okteto-kube.conf apply -f dev-restserver-deployment.yaml'
+			   sh ' k8s deployment has been released'
+					
 			}
 		}
     }
