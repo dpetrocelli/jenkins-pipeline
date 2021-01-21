@@ -106,9 +106,10 @@ pipeline {
 					echo " image has been built "
 
 					withCredentials([usernamePassword(credentialsId: 'dpetrocelli', passwordVariable: 'dpetrocelliPassword', usernameVariable: 'dpetrocelliUser')]) {
-          			sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
-          			sh 'docker push dpetrocelli/test2:latest'
-					echo " docker image has been published"
+          				sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
+          				sh 'docker push dpetrocelli/test2:latest'
+						echo " docker image has been published"
+					}
                 }
             } 
         }
