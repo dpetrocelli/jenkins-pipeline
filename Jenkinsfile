@@ -65,7 +65,7 @@ pipeline {
     agent any 
 	
     stages { 
-		stage('Ask for repo commits') {
+		stage('Ask for repo commits (tags)') {
 			steps {
 
 				sh '''#!/bin/bash
@@ -77,37 +77,37 @@ pipeline {
 				'''
 			}
 		}
-        stage('Cloning our Git') { 
-            /*steps { 
-                git 'https://github.com/dpetrocelli/jenkins-pipeline.git' 
-            }*/
+        stage('Cloning Git') { 
+            
 			steps { 
 				withEnv(["PROD_COMMIT=yes"]) {
 						
 						echo 'Cloning '
 						sh 'rm -rf jenkins-pipeline ; git clone https://github.com/dpetrocelli/jenkins-pipeline'
+						echo "Repo has been cloned"
 				}
 			}
         } 
         
-		stage ('Compile Stage')  {
+		stage ('Compiling Stage')  {
 			steps {
 				withEnv(["PROD_COMMIT=yes"]) {
-					sh 'cd jenkins-pipeline ; cd java-code ; mvn -B -DskipTests clean package ; cd target ; cp demo-0.0.1-SNAPSHOT.jar ../automation/server2.jar'	
-					// cd target ; cp demo-0.0.1-SNAPSHOT.jar ../automation/server2.jar'	
+					sh 'cd jenkins-pipeline ; cd java-code ; mvn -B -DskipTests clean package ; cd target ; cp demo-0.0.1-SNAPSHOT.jar ../automation/server.jar'	
 					echo ".jar created, and moved to the correct folder "
 				}
 			}
 		}
-		/*
-		stage('Building our image') { 
+		
+		stage('Building image') { 
             steps { 
                 script { 
-					sh ''
+					sh 'cd jenkins-pipeline ; cd java-code ; cd automation '
                     dockerImage = docker.build registry + ":$BUILD_NUMBER" 
+					echo " image has been built "
                 }
             } 
         }
+		/*
         stage('Deploy our image') { 
             steps { 
                 script { 
