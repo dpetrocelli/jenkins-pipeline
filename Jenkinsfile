@@ -93,7 +93,8 @@ pipeline {
 		stage ('Compile Stage')  {
 			steps {
 				withEnv(["PROD_COMMIT=yes"]) {
-					sh 'cd jenkins-pipeline ; cd java-code ; mvn -B -DskipTests clean package ; cd target ; cp demo-0.0.1-SNAPSHOT.jar ../../automation/server2.jar'	
+					sh 'cd jenkins-pipeline ; cd java-code ; mvn -B -DskipTests clean package '
+					// cd target ; cp demo-0.0.1-SNAPSHOT.jar ../../automation/server2.jar'	
 					echo ".jar created, and moved to the correct folder "
 				}
 			}
